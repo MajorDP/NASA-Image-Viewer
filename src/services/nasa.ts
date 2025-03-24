@@ -7,10 +7,12 @@ import {
 
 const API_KEY: string = import.meta.env.VITE_NASA_API_KEY;
 
-export const getNasaAPOD = async (): Promise<IAPODResponse | IError> => {
+export const getNasaAPOD = async (
+  date: string
+): Promise<IAPODResponse | IError> => {
   try {
     const res = await fetch(
-      `https://api.nasa.gov/planetary/apod?api_key=${API_KEY}`
+      `https://api.nasa.gov/planetary/apod?date=${date}&api_key=${API_KEY}`
     );
 
     const data = await res.json();
