@@ -8,7 +8,7 @@ function AstronomyPictureOfTheDay() {
   const [date, setDate] = useState(
     new Date(Date.now()).toISOString().split("T")[0]
   );
-  console.log(date);
+
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [data, setData] = useState<IAPODResponse | null>(null);
@@ -21,6 +21,10 @@ function AstronomyPictureOfTheDay() {
         setError(data.error);
       } else {
         setData(data);
+        //In case of error mentioned in the request of image for today not existing yet, the selected date must be fixed to yesterday's date
+        if (date !== data.date) {
+          setDate(data.date);
+        }
       }
 
       setIsLoading(false);
