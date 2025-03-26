@@ -8,7 +8,7 @@ import Earth from "./pages/Earth";
 function App() {
   return (
     <BrowserRouter>
-      <div className="bg-[#0D0D0D] text-[#EAEAEA] w-full min-h-screen flex flex-col">
+      <div className="text-[#EAEAEA] w-full min-h-screen flex flex-col scrollbar-hide">
         <Navigation />
         <Routes>
           <Route path="/" element={<Home />} />

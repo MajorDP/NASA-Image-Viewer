@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
-import { getNasaAPOD } from "../services/nasa";
 import Spinner from "../components/Spinner";
-import { IAPODResponse } from "../types/nasa";
 import Error from "../components/Error";
+import { getNasaAPOD } from "../services/nasa";
+import { IAPODData } from "../types/nasa";
 
 function AstronomyPictureOfTheDay() {
   const [date, setDate] = useState(
@@ -11,7 +11,7 @@ function AstronomyPictureOfTheDay() {
 
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
-  const [data, setData] = useState<IAPODResponse | null>(null);
+  const [data, setData] = useState<IAPODData | null>(null);
 
   useEffect(() => {
     async function getAPOD() {
@@ -42,8 +42,8 @@ function AstronomyPictureOfTheDay() {
 
   return (
     <div className="w-full h-full mb-10">
-      <div className="mb-6 flex flex-col items-center mt-10">
-        <label className="text-lg font-medium text-gray-200 mb-2">
+      <div className="mb-6 flex flex-col items-center mt-10 bg-[#0D0D0D] w-fit m-auto px-4 pt-2 border border-[#5D3FD3] rounded-md">
+        <label className="text-base font-medium text-gray-200 mb-2">
           Select a Date:
         </label>
         <input
@@ -51,15 +51,10 @@ function AstronomyPictureOfTheDay() {
           value={date}
           max={new Date().toISOString().split("T")[0]}
           onChange={(e) => setDate(e.target.value)}
-          className="px-4 py-2 rounded-md border border-[#5D3FD3] bg-gray-800 text-gray-200 shadow-md w-44 "
+          className="px-4 py-2 rounded-md border-b-0 border border-[#5D3FD3] bg-gray-800 text-gray-200 shadow-md w-44"
         />
       </div>
-      <h1 className="text-2xl sm:text-4xl font-bold bg-gradient-to-r from-[#0084FF] to-[#4faaff] bg-clip-text text-transparent text-center">
-        Astronomy Picture of the Day:
-        <p className="text-xl sm:text-3xl mt-2 text-[#EAEAEA] font-normal">
-          {data?.title}
-        </p>
-      </h1>
+
       <div className="flex flex-col  lg:flex-row justify-center items-start gap-5 mt-10">
         {data?.url ? (
           <div className="m-auto lg:m-0 max-w-[90%] lg:max-w-[50%] border border-[#5D3FD3] rounded-md shadow-lg shadow-[#5D3FD3]">
@@ -74,14 +69,25 @@ function AstronomyPictureOfTheDay() {
           </div>
         )}
 
-        <div className="m-auto lg:m-0 max-w-[90%] lg:max-w-[40%] h-fit border border-[#5D3FD3] rounded-md shadow-lg shadow-[#5D3FD3] p-6 ">
-          <p className="opacity-90 mb-6 text-sm sm:text-base">
+        <div className="m-auto lg:m-0 max-w-[90%] lg:max-w-[40%] h-fit bg-[#0D0D0D] border border-[#5D3FD3] rounded-md shadow-lg shadow-[#5D3FD3] p-6 ">
+          <h1 className="text-lg sm:text-xl font-bold bg-gradient-to-r from-[#0084FF] to-[#4faaff] bg-clip-text text-transparent text-center mb-8">
+            Astronomy Picture of{" "}
+            {new Date().toISOString().split("T")[0] === date
+              ? "the Day"
+              : data?.date}
+            <p className="text-base sm:text-base mt-2 text-[#EAEAEA] font-normal">
+              {data?.title}
+            </p>
+          </h1>
+          <p className="opacity-80 mb-6 text-sm sm:text-base">
             {data?.explanation}
           </p>
           {data?.copyright && (
-            <p className="opacity-40 mb-6">Copyrighted by: {data.copyright}</p>
+            <p className="opacity-40 mb-6 text-sm ">
+              Copyright by: {data.copyright}
+            </p>
           )}
-          <p className="opacity-40">~Date: {data?.date}</p>
+          <p className="opacity-50 text-sm">~Date: {data?.date}</p>
         </div>
       </div>
     </div>

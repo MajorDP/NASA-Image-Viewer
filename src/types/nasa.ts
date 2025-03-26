@@ -1,5 +1,8 @@
-//type for APOD
-export interface IAPODResponse {
+export interface IError {
+  error: string;
+}
+
+export interface IAPODData {
   date: string;
   explanation: string;
   hdurl?: string;
@@ -10,15 +13,13 @@ export interface IAPODResponse {
   copyright?: string;
 }
 
-//type for Earth images data
-export interface IEPICImagesResponse {
+export interface IEPICImageData {
   imageName: string;
   caption: string;
   date: string;
 }
 
-//type for location image data
-export interface ILocationResponse {
+export interface ILocationData {
   coords: {
     lat: number;
     lng: number;
@@ -26,12 +27,7 @@ export interface ILocationResponse {
   url: string;
 }
 
-//type errors
-export interface IError {
-  error: string;
-}
-
-export interface IEPICResponse {
+export interface IEPICData {
   attitude_quaternions: {
     q0: number;
     q1: number;
