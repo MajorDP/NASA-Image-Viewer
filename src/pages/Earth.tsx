@@ -5,13 +5,12 @@ import Spinner from "../components/Spinner";
 import Error from "../components/Error";
 
 function Earth() {
-  const [availableDates, setAvailableDates] = useState<string[]>([]);
   const [date, setDate] = useState("");
+  const [availableDates, setAvailableDates] = useState<string[]>([]);
   const [availableImages, setAvailableImages] = useState<IEPICImageData[]>([]);
   const [selectedImage, setSelectedImage] = useState<string | null>(null);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
-  const [dateError, setDateError] = useState<string | null>(null);
 
   useEffect(() => {
     async function fetchAvailableDates() {
@@ -45,10 +44,9 @@ function Earth() {
   const handleDateChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const selectedDate = e.target.value;
     if (!availableDates.includes(selectedDate)) {
-      setDateError("No available images for this date.");
+      setError("No available images for this date.");
       return;
     }
-    setDateError(null);
     setDate(selectedDate);
   };
 
@@ -96,7 +94,6 @@ function Earth() {
           </div>
         )}
       </div>
-      {dateError && <p className="text-red-500 mt-2">{dateError}</p>}
 
       {date && selectedImage ? (
         <>
