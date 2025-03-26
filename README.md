@@ -16,6 +16,12 @@
 - **TypeScript** (Static typing for better development experience)
 - **TailwindCSS** (Utility-first CSS framework for styling)
 
+### Direct link to app:
+
+**An alternative to installing and setting the app up is just visiting this link.**
+(Environment variables for NASA API Key already set)
+[https://nasa-image-viewer.vercel.app/](https://nasa-image-viewer.vercel.app/) (Deployment via Vercel)
+
 ### Installation & Setup:
 
 1. Clone the repository:
